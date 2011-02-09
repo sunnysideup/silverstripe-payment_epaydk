@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>ePay - HTML example</title>
+	<script type="text/javascript">
+		function gup(name)
+		{
+		name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+		var regexS = "[\\?&]"+name+"=([^&#]*)";
+		var regex = new RegExp( regexS );
+		var results = regex.exec( window.location.href );
+		if( results == null )
+			return "";
+		else
+			return results[1];
+		}
+	</script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Accept Page</h1>
+This page is called when the payment is accepted by ePay.
+<br /><br />
+When the payment is accepted ePay returns information about the payment.
+<br />
+The following JavaScript is used to show the GET-parameters returned by ePay:<br /><br />
+function gup( name )<br />
+{<br />
+  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");<br />
+  var regexS = "[\\?&]"+name+"=([^&#]*)";<br />
+  var regex = new RegExp( regexS );<br />
+  var results = regex.exec( window.location.href );<br />
+  if( results == null )<br />
+    return "";<br />
+  else<br />
+    return results[1];<br />
+}<br />
+<br />
+
+<table cellspacing="0" cellpadding="3" style="width: 800px;">
+		<tr>
+			<td><b>Transaction ID:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('tid'));
+				</script>
+			</td>
+			<td>
+				The unique transaction ID returned by ePay.
+			</td>
+		</tr>
+		<tr>
+			<td><b>OrderID:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('orderid'));
+				</script>
+			</td>
+			<td>
+				The order ID.
+			</td>
+		</tr>
+		<tr>
+			<td><b>Amount:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('amount'));
+				</script>
+			</td>
+			<td>
+				The amount.
+			</td>
+		</tr>
+		<tr>
+			<td><b>Fee:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('transfee'));
+				</script>
+			</td>
+			<td>
+				The transaction fee.
+			</td>
+		</tr>
+		<tr>
+			<td><b>Currency:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('cur'));
+				</script>
+			</td>
+			<td>
+				The currency.
+			</td>
+		</tr>
+		<tr>
+			<td><b>Date:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('date').substring(0,4)+'-'+gup('date').substring(4,6)+'-'+gup('date').substring(6,8));
+				</script>
+			</td>
+			<td >
+				The date.
+			</td>
+		</tr>
+		<tr>
+			<td><b>Time:</b></td>
+			<td>
+				<script type="text/javascript">
+					document.write(gup('time').substring(0,2)+':'+gup('time').substring(2,4));
+				</script>
+			</td>
+			<td>
+				The time.
+			</td>
+		</tr>
+	</table>
+
+<br />
+<a href="payment.html">Go back and try again</a>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>ePay - HTML example of the ePay Standard Payment Window</title>
+	<script type="text/javascript" src="http://www.epay.dk/js/standardwindow.js"></script> 
+	<link href="style.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript">
+		function gup(name)
+		{
+		name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+		var regexS = "[\\?&]"+name+"=([^&#]*)";
+		var regex = new RegExp( regexS );
+		var results = regex.exec( window.location.href );
+		if( results == null )
+			return "";
+		else
+			return results[1];
+		}
+	</script>
+</head>
+<body>
+<h1>Start the ePay Standard Payment Window</h1>
+
+To use the Standard Payment Window the following code needs to be included:
+<br /><br />
+<b>&lt;script type="text/javascript" src="http://www.epay.dk/js/standardwindow.js"&gt;&lt;/script&gt;</b>
+
+<br /><br />
+The full documentation of the Payment Window is to be found here: <a href="http://www.epay.dk/support/docs.asp?solution=1" target="_blank">http://www.epay.dk/support/docs.asp?solution=1</a>.
+
+<br /><br />
+Now we need to provide the Standard Payment Window with information on the payment.<br />
+You can hide these information by making the type of the input fields hidden: <br />
+<b>&lt;input type=&quot;hidden&quot; name=&quot;merchantnumber&quot; value=&quot;ENTER YOUR MERCHANT NUMBER HERE&quot; /&gt;</b>
+<br />
+<br />
+These are the information required by the Payment Window:
+<form action="https://ssl.ditonlinebetalingssystem.dk/popup/default.asp" method="post" name="ePay" target="ePay_window" id="ePay">
+<table cellspacing="0" cellpadding="3" style="width: 800px;">
+		<tr>
+			<td>Merchantnumber:</td>
+			<td>
+				<input type="text" name="merchantnumber" value="ENTER YOUR MERCHANT NUMBER HERE" style="width: 200px;" />
+			</td>
+			<td>
+				This is your unique merchantnumber. You can find your test-merchantnumber by chosing <b>Support</b> - <b>Test information</b> in the ePay Administration
+			</td>
+		</tr>
+		<tr>
+			<td>Amount:</td>
+			<td>
+				<input type="text" name="amount" value="100" style="width: 200px;" />
+			</td>
+			<td>
+				The amount in minor units. 1 DKK = 100.
+			</td>
+		</tr>
+		<tr>
+			<td>Currency:</td>
+			<td>
+				<select name="currency" style="width: 200px;">
+					<option value="208">DKK (208)</option>
+					<option value="978">EUR (978)</option>
+					<option value="840">USD (840)</option>
+					<option value="578">NOK (578)</option>
+					<option value="752">SEK (752)</option>
+					<option value="826">GBP (826)</option>
+					<option value="036">AUD (036)</option>
+				</select>
+			</td>
+			<td>
+				The currency number which the amount is provided in. A full list of supported currencies is available in the ePay administration <b>Support</b> - <b>Currency codes</b>: 
+			</td>
+		</tr>
+		<tr>
+			<td>Add fee</td>
+			<td>
+				<select name="addfee">
+					<option value="0">No (0)</option>
+					<option value="1">Yes (1)</option>
+				</select>
+			</td>
+			<td>
+				To add the transaction fee to the amount.
+			</td>
+		</tr>
+		<tr>
+			<td>OrderID:</td>
+			<td>
+				<input type="text" name="orderid" style="width: 200px;" />
+			</td>
+			<td>
+				This is your reference for the payment. By leaving this blank we'll generate a unique order id for you.
+			</td>
+		</tr>
+		<tr>
+			<td>AcceptURL:</td>
+			<td>
+				<input type="text" name="accepturl" value="" style="width: 200px;" />
+			</td>
+			<td>
+				The cardholder will return to this URL when the payment is approved.
+			</td>
+		</tr>
+		<tr>
+			<td>DeclineURL:</td>
+			<td>
+				<input type="text" name="declineurl" value="" style="width: 200px;" />
+			</td>
+			<td>
+				The cardholder will return to this URL if the payment is aborted by the cardholder.
+			</td>
+		</tr>
+		<tr>
+			<td>Window state:</td>
+			<td>
+				<select name="windowstate" style="width: 200px;">
+					<option value="1">Popup (1)</option>
+					<option value="2">Same window (2)</option>
+				</select>
+			</td>
+			<td>
+				How the Payment Window should open.
+			</td>
+		</tr>
+		<tr>
+			<td>Language:</td>
+			<td>
+				<select name="language">
+					<option value="1">Danish (1)</option>
+					<option value="2" selected="selected">English (2)</option>
+				</select>
+			</td>
+			<td>
+				The language. Error messages will be returned in this language.
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="button" value="Open Payment Window" class="button" style="width: 200px;" onClick="open_ePay_window()"></td>
+			<td>To open the payment window the following JavaScript function is called by clicking the button <b>open_ePay_window()</b></td>
+		</tr>
+	</table>
+</form>
+	<script type="text/javascript">
+ 		var objForm = document.getElementById("ePay");
+	    var objAcceptUrl = objForm.accepturl;
+		var objDeclineUrl = objForm.declineurl;
+		var objOrderID = objForm.orderid;
+		var Location = String(self.location.protocol+'//'+self.location.host+self.location.pathname);
+		
+		objOrderID.value = gup('orderid');
+		
+		objAcceptUrl.value = Location.replace('payment.html', 'accept.html');
+		objDeclineUrl.value = Location;
+	</script>
+	<br />
+	<a href="index.html">Go back to the intro page</a>
+</body>
+</html>
