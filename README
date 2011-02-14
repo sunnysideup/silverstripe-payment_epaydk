@@ -1,0 +1,11 @@
+SETUP:
+-Copy entire payment_epaydk directory into your silverstripe project directory.
+-Enter your epay.dk mechant number into your mysite/_config.php file with the set_merchant_number function eg:
+	EpaydkPayment::set_merchant_number('yournumberhere'); 
+-See payment_epaydk/_config.php for further configuration settings
+
+
+TODO:
+set description / order text
+set payment date & time based on returned data
+make sure all currencies use 2 decimal places for minor units
