@@ -3,8 +3,7 @@
  * ePay.dk Payment Type
  * @author: Jeremy Shipman - jeremy [at] burnbright [dot] co [dot] nz
  * 
- * Developer docs:
- * http://tech.epay.dk/Technical-documentation-for-ePay-Payment-Webservice_21.html
+ * docs: http://tech.epay.dk
  */
 
 class EpaydkPayment extends Payment {
@@ -14,6 +13,7 @@ class EpaydkPayment extends Payment {
 		'TransactionFee' => 'Currency',
 		'CardID' => 'Int',
 		'CardNoPostFix' => 'Varchar(4)'
+		//'Fee' => 'Currency'
 	);
 
 	static $submit_url = "https://ssl.ditonlinebetalingssystem.dk/popup/default.asp";
@@ -101,7 +101,7 @@ class EpaydkPayment extends Payment {
 			self::$use3d = $value;
 	}
 	
-	static function add_fee($add){
+	static function add_fee($add = true){
 		self::$add_fee = $add;
 	}
 
