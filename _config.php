@@ -9,4 +9,4 @@
 //EpaydkPayment::set_sms_number("123456789");
 //EpaydkPayment::set_email("you@youremail.dom");
 //EpaydkPayment::set_google_tracker("UA-XXXXX-X"); //see http://tech.epay.dk/How-to-track-using-Google-Analytics-with-ePay-Payment-Window_62.html
-//EpaydkPayment::set_use3d(2); //use3d 1 = , 2 = 
+//EpaydkPayment::set_use3d(2); //use3d 1 = 3D Secure is used, 2 = ONLY 3D Secure is used 
