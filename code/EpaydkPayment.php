@@ -171,7 +171,10 @@ JS;
 			new HiddenField('language', 'Language', self::$language),
 		
 			//return/callback urls
-			new HiddenField('accepturl', 'Accept URL', Director::absoluteBaseURL() . $controller->Link('accept')), new HiddenField('declineurl', 'Decline URL', Director::absoluteBaseURL() . $controller->Link('decline')), new HiddenField('callbackurl', 'Callback URL', Director::absoluteBaseURL() . $controller->Link('callback')), new HiddenField('InstantCallback', 'Instant Callback', 1), //
+			new HiddenField('accepturl', 'Accept URL', Director::absoluteBaseURL() . $controller->Link('accept')),
+			new HiddenField('declineurl', 'Decline URL', Director::absoluteBaseURL() . $controller->Link('decline')),
+			new HiddenField('callbackurl', 'Callback URL', Director::absoluteBaseURL() . $controller->Link('callback')),
+			new HiddenField('instantcallback', 'Instant Callback', 1), //
 			new HiddenField('instantcapture', 'Instant Capture', 1),
 			//new HiddenField('ordertext','Order Text','')
 			//new HiddenField('group','Group',$group)
@@ -414,8 +417,31 @@ class EpaydkPayment_Controller extends Controller {
 	}
 
 	function callback() {
+		$this->doCallback();		
+	}
 
+	function accept() {
+		
+		//need to do callback processing when in dev mode
+		//...I think, because server can't call localhost url.
+		if(Director::isDev()){
+			$this->doCallback();
+		}
+		$this->doRedirect();
+	}
+
+	function decline() {
+		if($payment = $this->payment()) {
+			$payment->Status = 'Failure';
+			$payment->write();
+		}
+		$this->doRedirect();
+	}
+	
+	protected function doCallback(){
+		
 		$payment = $this->payment();
+		
 		if (!$payment)
 			return;
 
@@ -449,20 +475,9 @@ class EpaydkPayment_Controller extends Controller {
 		}
 
 		$payment->write();
+		
 	}
-
-	function accept() {		
-		$this->doRedirect();
-	}
-
-	function decline() {
-		if($payment = $this->payment()) {
-			$payment->Status = 'Failure';
-			$payment->write();
-		}
-		$this->doRedirect();
-	}
-
+	
 	function doRedirect() {
 		
 		$payment = $this->payment();
