@@ -4,6 +4,8 @@ SETUP:
 	EpaydkPayment::set_merchant_number('yournumberhere'); 
 -See payment_epaydk/_config.php for further configuration settings
 
+See the _config.php file for further configuration. 
+
 
 TODO:
 set description / order text
