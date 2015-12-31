@@ -77,9 +77,9 @@ When the payment is accepted ePay returns information about the payment.
 	</table>
 	
 	<?php
-	//Include the interface to handle the transaction
-	include("handle_payment.php");
-	?>
+    //Include the interface to handle the transaction
+    include("handle_payment.php");
+    ?>
 
 	<br />
 <a href="index.php">Go back</a>
