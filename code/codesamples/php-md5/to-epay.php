@@ -23,17 +23,18 @@ To calculate the MD5 key sent to ePay please fill out the form below.
 
 <?php
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		?>
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        ?>
 		<div class="success">
 			<?php
-				echo "MD5 Key to be sent to ePay: <b>". md5($_POST['cur'] . $_POST['amount'] . $_POST['orderid'] . $_POST['md5']) . "</b>";
-			?>
+                echo "MD5 Key to be sent to ePay: <b>". md5($_POST['cur'] . $_POST['amount'] . $_POST['orderid'] . $_POST['md5']) . "</b>";
+        ?>
 			<br />
 			In your payment form this key should be sent in a hidden field with the name <b>MD5key</b>
 		</div><br /><br />
 		<?php
-	}
+
+    }
 
 ?>
 
