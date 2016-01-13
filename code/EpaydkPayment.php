@@ -132,7 +132,7 @@ class EpaydkPayment extends Payment {
 
 		$renderedpage = $controller->renderWith('PaymentProcessingPage');
 
-		return new Payment_Processing($renderedpage);
+		return EcommercePayment_Processing::create($renderedpage);
 	}
 
 	function getEPayForm() {
