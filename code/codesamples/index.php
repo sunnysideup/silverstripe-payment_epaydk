@@ -1,20 +1,23 @@
 <?php
 //Function used to get the current URL
-function curPageURL() {
-	$pageURL = 'http';
-	if (@$_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
-	$pageURL .= "://";
-	if ($_SERVER["SERVER_PORT"] != "80") {
-	$pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-	} else {
-	$pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	}
-	$pageURL = str_replace("?".$_SERVER['QUERY_STRING'], "", $pageURL);
-	
-	
-	$pageURL = substr($pageURL, 0, strripos($pageURL, '/'));
-	
-	return $pageURL;
+function curPageURL()
+{
+    $pageURL = 'http';
+    if (@$_SERVER["HTTPS"] == "on") {
+        $pageURL .= "s";
+    }
+    $pageURL .= "://";
+    if ($_SERVER["SERVER_PORT"] != "80") {
+        $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+    } else {
+        $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+    }
+    $pageURL = str_replace("?".$_SERVER['QUERY_STRING'], "", $pageURL);
+    
+    
+    $pageURL = substr($pageURL, 0, strripos($pageURL, '/'));
+    
+    return $pageURL;
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -23,17 +23,17 @@ To calculate the MD5 key received from ePay please fill out the form below.
 
 <?php
 
-	if($_SERVER['REQUEST_METHOD'] == 'POST'){
-		?>
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        ?>
 		<div class="success">
 			<?php
-				echo "MD5 Key received from ePay: <b>". md5($_POST['amount'] . $_POST['orderid'] . $_POST['tid'] . $_POST['md5']) . "</b>";
-			?>
+                echo "MD5 Key received from ePay: <b>". md5($_POST['amount'] . $_POST['orderid'] . $_POST['tid'] . $_POST['md5']) . "</b>"; ?>
 			<br />
 			When you are able to calculate the MD5 Key returend from ePay you can on the accept/callback page check if it is mathing the <b>eKey</b> GET parameter
 		</div><br /><br />
 		<?php
-	}
+
+    }
 
 ?>
 
